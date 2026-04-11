@@ -21,3 +21,13 @@ class Bouncable {
         }
     }
 }
+function setupBouncables(){
+     for(var y = 0; y < 1000; y++){
+        bouncables.push(new Bouncable(color(random(0,255),random(0,255),random(0,255)),random(50,350),random(50,350),random(5,50),random(1,5),random(0,360)))
+  }
+}
+function drawBouncables(){
+    for(var y = 0; y < bouncables.length; y++){
+    bouncables[y].draw();
+    }
+}
