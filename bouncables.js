@@ -1,10 +1,23 @@
 class Bouncable {
-    constructor(x,y,size){
+    constructor(color,x,y,size,speed,direction){
+        this.color = color;
         this.x = x;
         this.y = y;
         this.size = size;
+        this.speed = speed;
+        this.direction = direction;
     }
     draw() {
-        circle(this.x , this.y , this.size)
+        fill(this.color)
+        circle(this.x , this.y , this.size, this.speed, this.direction)
+
+        this.x = this.x + sin(PI / 180 * this.direction) * this.speed
+        this.y = this.y + cos(PI / 180 * this.direction) * this.speed
+        if(this.x + this.size / 2 >= 400|| this.x - this.size / 2 <= 0){
+            this.direction = this.direction * -1;
+        }
+        if(this.y + this.size / 2 >= 400 || this.y - this.size / 2 <= 0){
+            this.direction = (this.direction - 180) * -1;
+        }
     }
 }
