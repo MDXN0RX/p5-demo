@@ -1,5 +1,5 @@
 var bouncables = [];
-var setupScript = function() {}
+var setupScript = () => {}
 
 
 function setup() {
