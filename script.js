@@ -3,6 +3,7 @@ function projectSelected(){
 
     if (projectsSelect.value === 'bouncables') {
         setupScript = setupBouncables;
+        drawScript = drawBouncables;
     }
     setupScript()
 }

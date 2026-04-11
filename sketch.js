@@ -1,5 +1,6 @@
 var bouncables = [];
-var setupScript = () => {}
+var setupScript = () => {};
+var drawScript = () => {};
 
 
 function setup() {
@@ -8,5 +9,5 @@ function setup() {
 }
 function draw() {
   background(220) 
-  drawBouncables();
+  drawScript();
 }
