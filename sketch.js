@@ -1,9 +1,12 @@
 var bouncables = [];
+var setupScript = function() {}
+
+
 function setup() {
   createCanvas(400, 400);
-  setupBouncables()
+  setupScript();
 }
 function draw() {
   background(220) 
-  drawBouncables()
+  drawBouncables();
 }
