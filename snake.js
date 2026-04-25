@@ -35,5 +35,5 @@ function drawSnake() {
 }
 
 function setupSnake() {
-    snakeHead.image = loadImage('assets/images/snake-head.png');
+    snakeHead.image = loadImage('assets/snake-head.png');
 }
