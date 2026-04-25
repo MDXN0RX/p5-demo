@@ -1,3 +1,5 @@
+var frequency = 0;
+
 function flagSegment(color, xInitial, yInitial, segmentWidth, segmentHeight, param1, param2) {
   fill(color);
   beginShape();
@@ -14,13 +16,11 @@ function flagSegment(color, xInitial, yInitial, segmentWidth, segmentHeight, par
 
   endShape(CLOSE);
 }
-function drawFlag(){
-    background(220)
-    flagSegment("yellow", 20, 0, 500, 100, 0.009, 10)
-    flagSegment("green", 20, 100, 500, 100, 0.009, 10)
-    flagSegment("red", 20, 200, 500, 100, 0.009, 10)
-  
+
+function drawFlags() {
+    flagSegment('yellow', 50, 50, 250, 50, 0.03, 5);
+    flagSegment('green', 50, 100, 250, 50, 0.03, 5);
+    flagSegment('red', 50, 150, 250, 50, 0.03, 5);
+
     frequency += 0.05;
-    
-  
 }
