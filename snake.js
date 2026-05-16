@@ -1,11 +1,27 @@
-const cellSize = 30;
+const cellSize = 25;
 const directionInitial = 'r';
+const tail = [];
 
 const snakeHead = {
+    cellX: null,
+    cellY: null,
     direction: null,
     image: null,
-    positionX: null,
-    positionY: null,
+    sizeX: cellSize,
+    sizeY: cellSize
+};
+
+const food = {
+    cellX: null,
+    cellY: null,
+    image: null,
+    sizeX: cellSize,
+    sizeY: cellSize
+};
+const snakeTailSegment= {
+    cellX: null,
+    cellY: null,
+    image: null,
     sizeX: cellSize,
     sizeY: cellSize
 };
@@ -13,15 +29,21 @@ const snakeHead = {
 function drawHead() {
     angleMode(DEGREES);
     push();
-    translate(snakeHead.positionX, snakeHead.positionY);
-    if ( snakeHead.direction === 'r') {
-            rotate(-90);
-        }else if ( snakeHead.direction === 'l') {
-            rotate(90);
-        }else if ( snakeHead.direction === 'u'){
-            rotate(180);
-        }
+    translate(
+        cellSize * snakeHead.cellX + cellSize / 2,
+        cellSize * snakeHead.cellY + cellSize / 2
+    );
+
+    if (snakeHead.direction === 'r') {
+        rotate(-90);
+    } else if (snakeHead.direction === 'l') {
+        rotate(90);
+    } else if (snakeHead.direction === 'u') {
+        rotate(180);
+    }
+
     imageMode(CENTER);
+
     image(
         snakeHead.image,
         0,
@@ -29,6 +51,7 @@ function drawHead() {
         snakeHead.sizeX,
         snakeHead.sizeY
     );
+    
     pop();
     angleMode(RADIANS);
 }
@@ -45,33 +68,61 @@ function drawGrid() {
 
 function drawSnake() {
     drawGrid();
-    if ( snakeHead.direction === 'r') {
-        snakeHead.positionX = snakeHead.positionX + cellSize;
-    }else if ( snakeHead.direction === 'l') {
-        snakeHead.positionX -= cellSize;
-    }else if ( snakeHead.direction === 'u'){
-        snakeHead.positionY -= cellSize;
-    }else if ( snakeHead.direction === 'd'){
-        snakeHead.positionY += cellSize;
+
+    image(
+        food.image,
+        cellSize * food.cellX,
+        cellSize * food.cellY,
+        food.sizeX,
+        food.sizeY
+    );
+
+    if (snakeHead.direction === 'r') {
+        snakeHead.cellX += 1;
+    } else if (snakeHead.direction === 'l') {
+        snakeHead.cellX -= 1;
+    } else if (snakeHead.direction === 'u') {
+        snakeHead.cellY -= 1;
+    } else if (snakeHead.direction === 'd') {
+        snakeHead.cellY += 1;
     }
+
     drawHead();
 }
-function keyPressedSnake(){
-    if (key === 'w' &&  snakeHead.direction !== 'd'){
-        snakeHead.direction = 'u';
 
-    }else if (key === 's' &&  snakeHead.direction !=='u'){
-         snakeHead.direction = 'd';
-    }else if (key === 'a' &&  snakeHead.direction !=='r'){
-         snakeHead.direction = 'l';
-    }else if (key === 'd' &&  snakeHead.direction !=='l')
-         snakeHead.direction = 'r';
-console.log(key);
-console.log(keyCode);
+function keyPressedSnake() {
+    if (key === 'ArrowLeft' && snakeHead.direction !== 'r') {
+        snakeHead.direction = 'l';
+    } else if (key === 'ArrowRight' && snakeHead.direction !== 'l') {
+        snakeHead.direction = 'r';
+    } else if (key === 'ArrowUp' && snakeHead.direction !== 'd') {
+        snakeHead.direction = 'u';
+    } else if (key === 'ArrowDown' && snakeHead.direction !== 'u') {
+        snakeHead.direction = 'd';
+    }
 }
+
+function getRandomFoodCellPosition() {
+    const countCellX = canvasX / cellSize;
+    const countCellY = canvasY / cellSize;
+
+    return {
+        x: Math.floor(Math.random() * countCellX),
+        y: Math.floor(Math.random() * countCellY)
+    };
+}
+
 function setupSnake() {
-    snakeHead.image = loadImage('assets/snake-head.png');
+    food.image = loadImage('assets/food.png');
+    food.cellX = getRandomFoodCellPosition().x;
+    food.cellY = getRandomFoodCellPosition().y;
+
     snakeHead.direction = directionInitial;
-    snakeHead.positionX = cellSize * 2 + cellSize/2;
-    snakeHead.positionY = cellSize * 2 + cellSize/2;
+    snakeHead.image = loadImage('assets/snake-head.png');
+    snakeHead.cellX = 2;
+    snakeHead.cellY = 2;
+    snakeTailSegment = loadImage('assets/snake-segment.png');
+
+    tail.length = 0;
+    tail.push(snakeTailSegment);
 }
