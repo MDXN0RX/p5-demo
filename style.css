@@ -1,8 +1,28 @@
-html, body {
+html {
   margin: 0;
   padding: 0;
 }
-
+body {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+#p5-wrapper{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  label {
+    font-size: 90px;
+    text-align: center;
+  }
+  select{
+    width: 200px;
+  }
+}
 canvas {
   display: block;
+}
+#p5-canvas{
+  margin-top: 20px;
 }
